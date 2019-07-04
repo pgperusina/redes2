@@ -51,7 +51,8 @@ $result = $conn->query($sql);
                 <h1>Agregar miembro</h1>
                 <form name="add" action="add_member_controller.php" method="POST">
                     <label for="name">Nombre:</label><input type="text" value="<?= $_POST["name"] ?>" id="name" name="name" />
-                    <label for="carne">Carne:</label><input type="password" value="" id="carne" name="carne" />
+                    <label for="carne">Carne:</label><input type="text" value="" id="carne" name="carne" />
+                    <br/>
                     <div class="error"><?= $errorMsg ?></div>
                     <input type="submit" value="Add Member" name="sub" />
                 </form>
