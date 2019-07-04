@@ -24,27 +24,29 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 
-<body>
+    <body>
 
-    <h1>Redes de computadoras 2</h1>
-    <h2>Proyecto final de laboratorio<h2>
-            <table>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Carne</th>
-                </tr>
-                <?php
+        <h1>Redes de computadoras 2</h1>
+        <h2>Proyecto final de laboratorio<h2>
+                <table border="1">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Carne</th>
+                    </tr>
+                    <?php
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo "<tr><td>".$row['name']."</td><td>".$row['carne']."</td></tr>";
+                            }
+                        } else {
+                            echo "No results";
+                        }
+                        $conn->close();
+                    ?>
+                </table>
+                <br/>
+                <br/>
 
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row['name']."</td><td>".$row['carne']."</td></tr>";
-    }
-} else {
-    echo "No results";
-}
-$conn->close();
-?>
-            </table>
-</body>
+    </body>
 
 </html>
