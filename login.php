@@ -43,7 +43,7 @@ if(isset($_POST["sub"])) {
   <form name="login" action="#" method="POST">
     <label for="username">Username:</label><input type="text" value="<?= $_POST["username"] ?>" id="username" name="username" />
     <label for="password">Password:</label><input type="password" value="" id="password" name="password" />
-    <div class="error"><?php $errorMsg ?></div>
+    <div class="error"><?= $errorMsg ?></div>
     <input type="submit" value="Login" name="sub" />
   </form>
 </body>
