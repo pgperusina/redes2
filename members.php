@@ -6,6 +6,8 @@ if (!(isset($_SESSION['username'])) && $_SESSION['username'] == '') {
     
 }
 
+$errorMsg = $_SESSION['errorMessage'];
+
 $servername = "database-server";
 $username = "root";
 $password = "";
@@ -46,6 +48,13 @@ $result = $conn->query($sql);
                 </table>
                 <br/>
                 <br/>
+                <h1>Agregar miembro</h1>
+                <form name="add" action="add_member_controller.php" method="POST">
+                    <label for="name">Nombre:</label><input type="text" value="<?= $_POST["name"] ?>" id="name" name="name" />
+                    <label for="carne">Carne:</label><input type="password" value="" id="carne" name="carne" />
+                    <div class="error"><?= $errorMsg ?></div>
+                    <input type="submit" value="Add Member" name="sub" />
+                </form>
 
     </body>
 
