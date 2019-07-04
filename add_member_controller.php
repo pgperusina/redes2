@@ -20,7 +20,7 @@ if ( isset($_POST["sub"]) && isset($_POST["carne"]) && isset($_POST["name"])) {
         die("Connection failed: " . $conn->connect_error);
     } 
 
-    $sql = "INSERT INTO class_group (name, carne) values(".$_POST['name']. ", ".$_POST['carne']. ")";
+    $sql = "INSERT INTO class_group (name, carne) values('".$_POST['name']. "'', ''".$_POST['carne']. "')";
     if ($conn->query($sql) === TRUE) {
         $_SESSION['errorMessage'] = "Miembro ingresado exitosamente.";
         header ("Location: members.php");
