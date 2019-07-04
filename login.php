@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ((isset($_SESSION['username']) && $_SESSION['username'] != '')) {
+if((isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 
     header ("Location: members.php");
     
@@ -29,6 +29,7 @@ if(isset($_POST["sub"])) {
         $validUser = false;
     }
     $conn->close();
+}
     
 ?>
 <!DOCTYPE html>
