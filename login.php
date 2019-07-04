@@ -1,43 +1,48 @@
 <?php
-$servername = "database-server";
-$username = "root";
-$password = "";
-$dbname = "redes2grupo4";
+session_start();
+if ((isset($_SESSION['username']) && $_SESSION['username'] == '')) {
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+    header ("Location: members.php");
+    
+    }
+$errorMsg = "";
+if(isset($_POST["sub"])) {
+    $servername = "database-server";
+    $username = "root";
+    $password = "";
+    $dbname = "redes2grupo4";
 
-$sql = "SELECT name, carne FROM class_group";
-$result = $conn->query($sql);
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+
+    $sql = "SELECT username, password FROM user where username = ".$_POST['username']. " and password = ".$_POST['password'];
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $validUser = true;
+        header ("Location: members.php");
+    } else {
+        $errorMsg = "Credenciales erróneas";
+        $validUser = false;
+    }
+    $conn->close();
+    
 ?>
 <!DOCTYPE html>
 <html>
-
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <title>Login</title>
+</head>
 <body>
-
-    <h1>Redes de computadoras 2</h1>
-    <h2>Proyecto final de laboratorio<h2>
-            <table>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Carne</th>
-                </tr>
-                <?php
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row['name']."</td><td>".$row['carne']."</td></tr>";
-    }
-} else {
-    echo "No results";
-}
-$conn->close();
-?>
-            </table>
+  <form name="input" action="" method="POST">
+    <label for="username">Username:</label><input type="text" value="<?= $_POST["username"] ?>" id="username" name="username" />
+    <label for="password">Password:</label><input type="password" value="" id="password" name="password" />
+    <div class="error"><?= $errorMsg ?></div>
+    <input type="submit" value="Home" name="sub" />
+  </form>
 </body>
-
 </html>

@@ -1,0 +1,50 @@
+<?php
+session_start();
+if ((isset($_SESSION['username']) && $_SESSION['username'] == '')) {
+
+    header ("Location: members.php");
+    
+}
+
+$servername = "database-server";
+$username = "root";
+$password = "";
+$dbname = "redes2grupo4";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "SELECT name, carne FROM class_group";
+$result = $conn->query($sql);
+?>
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>Redes de computadoras 2</h1>
+    <h2>Proyecto final de laboratorio<h2>
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Carne</th>
+                </tr>
+                <?php
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo "<tr><td>".$row['name']."</td><td>".$row['carne']."</td></tr>";
+    }
+} else {
+    echo "No results";
+}
+$conn->close();
+?>
+            </table>
+</body>
+
+</html>
