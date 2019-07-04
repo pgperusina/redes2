@@ -22,11 +22,10 @@ if(isset($_POST["sub"])) {
     $sql = "SELECT username, password FROM user where username = ".$_POST['username']. " and password = ".$_POST['password'];
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $validUser = true;
+        $_SESSION['username'] = $_POST['username'];
         header ("Location: members.php");
     } else {
         $errorMsg = "Credenciales erróneas";
-        $validUser = false;
     }
     $conn->close();
 }
@@ -39,11 +38,12 @@ if(isset($_POST["sub"])) {
   <title>Login</title>
 </head>
 <body>
-  <form name="input" action="" method="POST">
+    <h1>LOGIN PAGE</h1>
+  <form name="login" action="#" method="POST">
     <label for="username">Username:</label><input type="text" value="<?= $_POST["username"] ?>" id="username" name="username" />
     <label for="password">Password:</label><input type="password" value="" id="password" name="password" />
-    <div class="error"><?= $errorMsg ?></div>
-    <input type="submit" value="Home" name="sub" />
+    <div class="error"><?php $errorMsg ?></div>
+    <input type="submit" value="Login" name="sub" />
   </form>
 </body>
 </html>
