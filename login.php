@@ -20,7 +20,7 @@ if(isset($_POST["sub"])) {
         die("Connection failed: " . $conn->connect_error);
     } 
 
-    $sql = "SELECT username, password FROM user where username = ".$_POST['username']. " and password = ".$_POST['password'];
+    $sql = "SELECT username, password FROM user where username = '".$_POST['username']. "' and password = '".$_POST['password']. "'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $_SESSION['username'] = $_POST['username'];
