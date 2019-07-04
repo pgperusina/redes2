@@ -1,6 +1,6 @@
 <?php
 session_start();
-if((isset($_SESSION['username']) && $_SESSION['username'] != '')) {
+if(isset($_SESSION['username']) && $_SESSION['username'] != '') {
 
     header ("Location: members.php");
     
@@ -21,6 +21,7 @@ if(isset($_POST["sub"])) {
 
     $sql = "SELECT username, password FROM user where username = ".$_POST['username']. " and password = ".$_POST['password'];
     $result = $conn->query($sql);
+    $errorMsg = $result->num_rows;
     if ($result->num_rows > 0) {
         $_SESSION['username'] = $_POST['username'];
         header ("Location: members.php");
