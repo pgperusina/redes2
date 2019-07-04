@@ -1,10 +1,10 @@
 <?php
 session_start();
-if ((isset($_SESSION['username']) && $_SESSION['username'] == '')) {
+if ((isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 
     header ("Location: members.php");
     
-    }
+}
 $errorMsg = "";
 if(isset($_POST["sub"])) {
     $servername = "database-server";
